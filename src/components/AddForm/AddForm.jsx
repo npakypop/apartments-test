@@ -1,3 +1,8 @@
+import {
+  loadFromSessionStorage,
+  removeFromSessionStorage,
+  saveToSessionStorage,
+} from "helpers/localStorage";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useAddApartmentMutation } from "redux/apartments/api";
@@ -9,6 +14,8 @@ const AddForm = () => {
     reset,
     formState: { errors, isSubmitSuccessful },
     trigger,
+    setValue,
+    watch,
   } = useForm({
     defaultValues: { name: "", description: "", rooms: null, price: null },
   });
@@ -16,14 +23,35 @@ const AddForm = () => {
   const [addApartment, { isLoading }] = useAddApartmentMutation();
 
   useEffect(() => {
+    const savedFormValues = loadFromSessionStorage("formValues");
+    if (savedFormValues) {
+      const parsedValues = JSON.parse(savedFormValues);
+      Object.keys(parsedValues).forEach((key) =>
+        setValue(key, parsedValues[key])
+      );
+    }
+  }, [setValue]);
+
+  useEffect(() => {
+    const subscription = watch((data) => {
+      saveToSessionStorage("formValues", JSON.stringify(data));
+    });
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [watch]);
+
+  useEffect(() => {
     if (isSubmitSuccessful) {
       reset();
+      removeFromSessionStorage("formValues");
     }
   }, [isSubmitSuccessful, reset]);
 
   const onSubmit = async (data) => {
     await addApartment({ ...data }).unwrap();
-    reset();
+    // reset();
+    // removeFromSessionStorage("formValues");
   };
 
   const handleBlur = (fieldName) => {
