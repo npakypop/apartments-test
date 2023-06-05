@@ -1,8 +1,11 @@
+import Loader from "components/UI/Loader/Loader";
+import MyButton from "components/UI/MyButton/MyButton";
 import React, { useState } from "react";
 import {
   useDeleteApartmentMutation,
   useGetApartmentByIdQuery,
 } from "redux/apartments/api";
+import css from "./Apartment.module.css";
 
 const Apartment = ({ item, index }) => {
   const [skip, setSkip] = useState(true);
@@ -22,13 +25,7 @@ const Apartment = ({ item, index }) => {
 
   return (
     <div>
-      <div
-        style={{
-          backgroundColor: "#D3D3D3",
-          outline: "1px solid teal",
-          marginTop: "20px",
-        }}
-      >
+      <div className={css.card}>
         <h2>
           {index + 1}. {item.name}
         </h2>
@@ -37,7 +34,7 @@ const Apartment = ({ item, index }) => {
         <div>price: {item.price}</div>
       </div> 
        <p>{item.description}</p> */}
-        <button
+        {/* <button
           style={{
             padding: "5px 10px",
             backgroundColor: "#ff7f7f",
@@ -49,8 +46,8 @@ const Apartment = ({ item, index }) => {
           onClick={() => handleDeleteApartment(item._id)}
         >
           {deleteIsLoading ? "deleting" : "delete"}
-        </button>
-        <button
+        </button> */}
+        {/* <button
           style={{
             padding: "5px 10px",
             backgroundColor: "#7fffb2",
@@ -61,18 +58,32 @@ const Apartment = ({ item, index }) => {
           onClick={openDetails}
         >
           Show details
-        </button>
-      </div>
-      {isLoading && <p>Loading...</p>}
-      {!skip && !isLoading && (
-        <div>
-          <div style={{ display: "flex", gap: "20px" }}>
-            <div>rooms: {apartment.rooms}</div>
-            <div>price: {apartment.price}</div>
-          </div>
-          <p>{apartment.description}</p>
+        </button> */}
+        <div className={css.btnWrp}>
+          <MyButton
+            variant="red"
+            disabled={deleteIsLoading ? true : false}
+            type="button"
+            onClick={() => handleDeleteApartment(item._id)}
+          >
+            {deleteIsLoading ? "Deleting" : "Delete"}
+          </MyButton>
+
+          <MyButton variant="green" type="button" onClick={openDetails}>
+            Show details
+          </MyButton>
         </div>
-      )}
+        {isLoading && <p>Loading...</p>}
+        {!skip && !isLoading && (
+          <div>
+            <div style={{ display: "flex", gap: "20px" }}>
+              <div>rooms: {apartment.rooms}</div>
+              <div>price: {apartment.price}</div>
+            </div>
+            <p>{apartment.description}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

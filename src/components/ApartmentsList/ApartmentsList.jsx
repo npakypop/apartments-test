@@ -1,4 +1,5 @@
 import Apartment from "components/Apartment/Apartment";
+import MySelect from "components/UI/MySelect/MySelect";
 import {
   loadFromSessionStorage,
   saveToSessionStorage,
@@ -30,8 +31,8 @@ const ApartmentsList = () => {
   if (isLoading) return <h1>loading</h1>;
 
   return (
-    <div style={{ backgroundColor: "grey" }}>
-      <select
+    <div>
+      {/* <select
         name="rooms"
         value={rooms}
         onChange={(e) => setRooms(e.target.value)}
@@ -41,8 +42,8 @@ const ApartmentsList = () => {
         <option value="2">2 rooms</option>
         <option value="3">3 rooms</option>
         <option value="4">4 rooms</option>
-      </select>
-      <select
+      </select> */}
+      {/* <select
         name="price"
         value={price}
         onChange={(e) => setPrice(e.target.value)}
@@ -50,8 +51,31 @@ const ApartmentsList = () => {
         <option value="">default</option>
         <option value="asc">ascending</option>
         <option value="desc">descending</option>
-      </select>
-      <h3>List of apartments</h3>
+      </select> */}
+      <MySelect
+        value={rooms}
+        onChange={(v) => setRooms(v)}
+        defaultValue="Filter by rooms"
+        options={[
+          { value: "", name: "All" },
+          { value: "1", name: "1 rooms" },
+          { value: "2", name: "2 rooms" },
+          { value: "3", name: "3 rooms" },
+          { value: "4", name: "4 rooms" },
+        ]}
+      />
+      <MySelect
+        value={price}
+        onChange={(v) => setPrice(v)}
+        defaultValue="Sort by price"
+        options={[
+          { value: "", name: "None" },
+          { value: "asc", name: "Ascending" },
+          { value: "desc", name: "Descending" },
+        ]}
+      />
+
+      <h1>List of apartments</h1>
       <p>Total: {data.length}</p>
       <ul>
         {data.map((item, index) => (
