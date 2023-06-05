@@ -18,7 +18,7 @@ export const apartmentApi = createApi({
         if (price) {
           queryParams += `${rooms ? "&" : ""}price=${price}`;
         }
-        return `/${queryParams && `?${queryParams}`}`;
+        return `/apartments${queryParams && `?${queryParams}`}`;
       },
       providesTags: (result) =>
         result
@@ -29,11 +29,11 @@ export const apartmentApi = createApi({
           : [{ type: "Apartments", id: "LIST" }],
     }),
     getApartmentById: build.query({
-      query: (id) => `/${id}`,
+      query: (id) => `/apartments${id}`,
     }),
     addApartment: build.mutation({
       query: (body) => ({
-        url: "/",
+        url: "/apartments",
         method: "POST",
         body,
       }),
@@ -41,7 +41,7 @@ export const apartmentApi = createApi({
     }),
     deleteApartment: build.mutation({
       query: (id) => ({
-        url: `/${id}`,
+        url: `/apartments${id}`,
         method: "DELETE",
       }),
       invalidatesTags: [{ type: "Apartments", id: "LIST" }],
