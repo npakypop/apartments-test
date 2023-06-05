@@ -1,11 +1,31 @@
 import Apartment from "components/Apartment/Apartment";
-import React, { useState } from "react";
+import {
+  loadFromSessionStorage,
+  saveToSessionStorage,
+} from "helpers/localStorage";
+import React, { useEffect, useState } from "react";
 import { useGetApartmentsQuery } from "redux/apartments/api";
 
 const ApartmentsList = () => {
   const [rooms, setRooms] = useState("");
   const [price, setPrice] = useState("");
   const { isLoading, data = [] } = useGetApartmentsQuery({ rooms, price });
+
+  useEffect(() => {
+    const savedRooms = loadFromSessionStorage("rooms");
+    const savedPrice = loadFromSessionStorage("price");
+    if (savedRooms) {
+      setRooms(savedRooms);
+    }
+    if (savedPrice) {
+      setPrice(savedPrice);
+    }
+  }, []);
+
+  useEffect(() => {
+    saveToSessionStorage("rooms", rooms);
+    saveToSessionStorage("price", price);
+  }, [rooms, price]);
 
   if (isLoading) return <h1>loading</h1>;
 

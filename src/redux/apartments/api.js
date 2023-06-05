@@ -33,7 +33,7 @@ export const apartmentApi = createApi({
     }),
     addApartment: build.mutation({
       query: (body) => ({
-        url: "/apartments",
+        url: "/apartments/",
         method: "POST",
         body,
       }),
