@@ -29,7 +29,7 @@ export const apartmentApi = createApi({
           : [{ type: "Apartments", id: "LIST" }],
     }),
     getApartmentById: build.query({
-      query: (id) => `/apartments${id}`,
+      query: (id) => `/apartments/${id}`,
     }),
     addApartment: build.mutation({
       query: (body) => ({
@@ -41,7 +41,7 @@ export const apartmentApi = createApi({
     }),
     deleteApartment: build.mutation({
       query: (id) => ({
-        url: `/apartments${id}`,
+        url: `/apartments/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: [{ type: "Apartments", id: "LIST" }],
