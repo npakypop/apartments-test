@@ -1,58 +1,42 @@
 import Apartment from "components/Apartment/Apartment";
+import Filter from "components/Filter/Filter";
 import MySelect from "components/UI/MySelect/MySelect";
 import {
   loadFromSessionStorage,
   saveToSessionStorage,
 } from "helpers/localStorage";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useGetApartmentsQuery } from "redux/apartments/api";
+import { selectFilter } from "redux/filter/filterSelector";
 
 const ApartmentsList = () => {
-  const [rooms, setRooms] = useState("");
-  const [price, setPrice] = useState("");
+  // const [rooms, setRooms] = useState("");
+  // const [price, setPrice] = useState("");
+  const { rooms, price } = useSelector(selectFilter);
   const { isLoading, data = [] } = useGetApartmentsQuery({ rooms, price });
+  // useEffect(() => {
+  //   const savedRooms = loadFromSessionStorage("rooms");
+  //   const savedPrice = loadFromSessionStorage("price");
+  //   if (savedRooms) {
+  //     setRooms(savedRooms);
+  //   }
+  //   if (savedPrice) {
+  //     setPrice(savedPrice);
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    const savedRooms = loadFromSessionStorage("rooms");
-    const savedPrice = loadFromSessionStorage("price");
-    if (savedRooms) {
-      setRooms(savedRooms);
-    }
-    if (savedPrice) {
-      setPrice(savedPrice);
-    }
-  }, []);
-
-  useEffect(() => {
-    saveToSessionStorage("rooms", rooms);
-    saveToSessionStorage("price", price);
-  }, [rooms, price]);
+  // useEffect(() => {
+  //   saveToSessionStorage("rooms", rooms);
+  //   saveToSessionStorage("price", price);
+  // }, [rooms, price]);
 
   if (isLoading) return <h1>loading</h1>;
 
   return (
     <div>
-      {/* <select
-        name="rooms"
-        value={rooms}
-        onChange={(e) => setRooms(e.target.value)}
-      >
-        <option value="">all</option>
-        <option value="1">1 room</option>
-        <option value="2">2 rooms</option>
-        <option value="3">3 rooms</option>
-        <option value="4">4 rooms</option>
-      </select> */}
-      {/* <select
-        name="price"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-      >
-        <option value="">default</option>
-        <option value="asc">ascending</option>
-        <option value="desc">descending</option>
-      </select> */}
-      <MySelect
+      <Filter />
+      {/* <MySelect
         value={rooms}
         onChange={(v) => setRooms(v)}
         defaultValue="Filter by rooms"
@@ -73,7 +57,7 @@ const ApartmentsList = () => {
           { value: "asc", name: "Ascending" },
           { value: "desc", name: "Descending" },
         ]}
-      />
+      /> */}
 
       <h1>List of apartments</h1>
       <p>Total: {data.length}</p>
@@ -89,3 +73,27 @@ const ApartmentsList = () => {
 };
 
 export default ApartmentsList;
+// {
+//   /* <select
+//       name="rooms"
+//       value={rooms}
+//       onChange={(e) => setRooms(e.target.value)}
+//     >
+//       <option value="">all</option>
+//       <option value="1">1 room</option>
+//       <option value="2">2 rooms</option>
+//       <option value="3">3 rooms</option>
+//       <option value="4">4 rooms</option>
+//     </select> */
+// }
+// {
+//   /* <select
+//       name="price"
+//       value={price}
+//       onChange={(e) => setPrice(e.target.value)}
+//     >
+//       <option value="">default</option>
+//       <option value="asc">ascending</option>
+//       <option value="desc">descending</option>
+//     </select> */
+// }

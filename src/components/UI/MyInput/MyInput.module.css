@@ -1,0 +1,31 @@
+.inputWrp{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    
+}
+.inputLabel{
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.input{
+    padding: 12px 16px;
+    border-radius: 4px;
+    border: 1px solid #07365f;
+}
+
+.error{
+    position: absolute;
+    color: red;
+    left: 0;
+    font-size: 14px;
+    bottom: -16px;
+}
+.textarea {
+    padding: 12px 16px;
+    border-radius: 4px;
+    border: 1px solid #07365f;
+    resize: none;
+}
