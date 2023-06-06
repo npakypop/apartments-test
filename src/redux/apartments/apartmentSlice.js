@@ -5,7 +5,7 @@ const apartmentSlice = createSlice({
   initialState: {
     apartments: [],
     amount: 0,
-    isLoading: true,
+    isLoading: false,
   },
 });
 

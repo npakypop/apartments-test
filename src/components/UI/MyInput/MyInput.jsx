@@ -16,7 +16,6 @@ const MyInput = ({
     <div className={css.inputWrp}>
       <label htmlFor={name} className={css.inputLabel}>
         {label}
-        {/* {required && "*"} */}
       </label>
       <textarea
         className={css.textarea}
@@ -34,7 +33,6 @@ const MyInput = ({
     <div className={css.inputWrp}>
       <label htmlFor={name} className={css.inputLabel}>
         {label}
-        {/* {required && "*"} */}
       </label>
       <input
         className={css.input}

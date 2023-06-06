@@ -1,0 +1,31 @@
+.listSection {
+    margin-top: 40px;
+}
+
+.listTitle{
+    text-align: center;
+}
+.total{
+    font-size: 32px;
+}
+.totalNumber{
+    font-size: 32px; 
+    font-weight: bold;}
+.list{
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 16px;
+}
+.listItem{
+    width: 600px;
+}
+.wrp{
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 24px;
+}
+.list{
+    margin-top: 24px;
+}

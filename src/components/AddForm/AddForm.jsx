@@ -1,20 +1,15 @@
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import MyButton from "components/UI/MyButton/MyButton";
 import MyInput from "components/UI/MyInput/MyInput";
+import { useAddApartmentMutation } from "redux/apartments/apartmentApi";
+import css from "./AddForm.module.css";
 import {
   DESCRIPTION_SCHEMA,
   NAME_SCHEMA,
   PRICE_SCHEMA,
   ROOMS_SCHEMA,
 } from "helpers/schemas";
-// import {
-//   loadFromSessionStorage,
-//   removeFromSessionStorage,
-//   saveToSessionStorage,
-// } from "helpers/localStorage";
-import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useAddApartmentMutation } from "redux/apartments/api";
-import css from "./AddForm.module.css";
 
 const AddForm = () => {
   const {
@@ -23,52 +18,17 @@ const AddForm = () => {
     reset,
     formState: { errors, isSubmitSuccessful },
     trigger,
-    // setValue,
-    // watch,
   } = useForm({
     defaultValues: { name: "", description: "", rooms: null, price: null },
   });
 
   const [addApartment, { isLoading }] = useAddApartmentMutation();
 
-  // useEffect(() => {
-  //   const savedFormValues = loadFromSessionStorage("formValues");
-  //   if (savedFormValues) {
-  //     const parsedValues = JSON.parse(savedFormValues);
-  //     Object.keys(parsedValues).forEach((key) =>
-  //       setValue(key, parsedValues[key])
-  //     );
-  //   }
-  // }, [setValue]);
-
-  // useEffect(() => {
-  //   const subscription = watch((data) => {
-  //     saveToSessionStorage("formValues", JSON.stringify(data));
-  //   });
-  //   return () => {
-  //     subscription.unsubscribe();
-  //   };
-  // }, [watch]);
-
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset();
-      // removeFromSessionStorage("formValues");
     }
   }, [isSubmitSuccessful, reset]);
-
-  // useEffect(() => {
-  //   const handleBeforeUnload = (event) => {
-  //     event.preventDefault();
-  //     event.returnValue = "Вы покидаете эту страницу и данные будут потеряны";
-  //   };
-
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
-
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // }, []);
 
   const onSubmit = async (data) => {
     await addApartment({ ...data }).unwrap();
@@ -80,7 +40,7 @@ const AddForm = () => {
 
   return (
     <div className={css.formWrp}>
-      <h3 className={css.title}>Add new apartment</h3>
+      <h2 className={css.title}>Add new apartment</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
         <MyInput
           type="text"

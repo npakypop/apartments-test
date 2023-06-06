@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { apartmentReducer } from "./apartments/slice";
-import { apartmentApi } from "./apartments/api";
+import { apartmentReducer } from "./apartments/apartmentSlice";
+import { apartmentApi } from "./apartments/apartmentApi";
 import { filterReducer } from "./filter/filterSlice";
 
 export const store = configureStore({

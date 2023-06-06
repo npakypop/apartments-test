@@ -1,17 +1,16 @@
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import MySelect from "components/UI/MySelect/MySelect";
+import { filterApartments } from "redux/filter/filterSlice";
 import {
   loadFromSessionStorage,
   saveToSessionStorage,
 } from "helpers/localStorage";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-// import { useGetApartmentsQuery } from "redux/apartments/api";
-import { filterApartments } from "redux/filter/filterSlice";
+import css from "./Filter.module.css";
 
 const Filter = () => {
   const [rooms, setRooms] = useState("");
   const [price, setPrice] = useState("");
-  //   const { isLoading, data = [] } = useGetApartmentsQuery({ rooms, price });
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,7 +32,7 @@ const Filter = () => {
   }, [rooms, price, dispatch]);
 
   return (
-    <div>
+    <div className={css.filterWrp}>
       <MySelect
         value={rooms}
         onChange={(v) => setRooms(v)}

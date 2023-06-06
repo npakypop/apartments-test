@@ -19,7 +19,7 @@
 .error{
     position: absolute;
     color: red;
-    left: 0;
+    right: 0;
     font-size: 14px;
     bottom: -16px;
 }

@@ -1,16 +1,11 @@
 import Container from "components/Layout/Container";
-import React from "react";
+import css from "./Header.module.css";
 
 const Header = () => {
   return (
-    <header
-      style={{
-        height: "60px",
-        backgroundColor: "#ff7f7f",
-      }}
-    >
+    <header className={css.header}>
       <Container>
-        <p>Apartments Marketplace</p>
+        <h2 className={css.headerTitle}>Apartments Marketplace</h2>
       </Container>
     </header>
   );

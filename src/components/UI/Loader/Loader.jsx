@@ -16,6 +16,7 @@ const Loader = () => {
         visible={true}
       />
     </div>
+  
   );
 };
 
