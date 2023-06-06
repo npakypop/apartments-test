@@ -1,3 +1,4 @@
+import MyButton from "components/UI/MyButton/MyButton";
 import {
   loadFromSessionStorage,
   removeFromSessionStorage,
@@ -130,7 +131,10 @@ const AddForm = () => {
           {errors.price && <p>{errors.price.message}</p>}
         </div>
 
-        <button type="submit">Submit</button>
+        {/* <button type="submit">Submit</button> */}
+        <MyButton variant="green" type="submit">
+          Add new appartment
+        </MyButton>
       </form>
     </div>
   );
