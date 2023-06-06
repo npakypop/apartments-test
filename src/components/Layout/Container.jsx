@@ -1,7 +1,7 @@
-import React from "react";
+import css from "./Container.module.css";
 
 const Container = ({ children }) => {
-  return <div style={{ padding: "0 120px", margin: "0 auto" }}>{children}</div>;
+  return <div className={css.container}>{children}</div>;
 };
 
 export default Container;

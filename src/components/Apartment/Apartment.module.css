@@ -10,3 +10,17 @@
     display: flex;
     justify-content: space-between;
 }
+
+.detailesWrp{
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.detailes{
+    font-size: 18px;
+}
+
+.fetchDetailesWrp{
+    margin-top: 20px;
+}
